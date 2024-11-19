@@ -7,6 +7,7 @@ import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TextSplitter;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -20,20 +21,12 @@ public class LoadVectorStore implements CommandLineRunner {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LoadVectorStore.class);
 
-  private final VectorStore vectorStore;
+  @Autowired
+  private VectorStore vectorStore;
 
-  private final VectorStoreProperties vectorStoreProperties;
+  @Autowired
+  private VectorStoreProperties vectorStoreProperties;
 
-  /**
-   * Constructor
-   *
-   * @param vectorStore {@linkplain VectorStore} the vector store we use
-   * @param vectorStoreProperties {@linkplain VectorStoreProperties} the vector store configuration
-   */
-  public LoadVectorStore( VectorStore vectorStore, VectorStoreProperties vectorStoreProperties ) {
-    this.vectorStore = vectorStore;
-    this.vectorStoreProperties = vectorStoreProperties;
-  }
 
   @Override
   public void run( String... args )
